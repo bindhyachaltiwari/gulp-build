@@ -1,0 +1,25 @@
+{
+  "name": "sapient-frontend",
+  "description": "RA development build tool",
+  "main": "",
+  "authors": [
+    "Sapient"
+  ],
+  "license": "MIT",
+  "moduleType": [],
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "2.2.1"
+  },  
+  "resolutions": {
+    "jquery": "2.2.1"
+  }
+}

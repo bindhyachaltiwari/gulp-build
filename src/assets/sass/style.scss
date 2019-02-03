@@ -1,0 +1,23 @@
+//Bootstrap
+@import "vendor/bootstrap.min";
+
+//Core Partials
+@import "variables";
+@import "fonts";
+@import "font-icons";
+@import "mixins";
+@import "function";
+@import "base";
+@import "theme";
+@import "typography";
+@import "icons";
+@import "animations";
+
+//Import ModulesPartials
+@import "partials/main-header-navigation";
+@import "partials/footer";
+@import "partials/main-container-wrapper";
+@import "partials/tiles-container";
+@import "partials/list-container";
+
+

@@ -1,0 +1,260 @@
+//clearfix
+%clearfix {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+/* Media queries Breakpoints */
+$breakpoints: (
+  'mobile'  : ( max-width:  480px ),  // for mobile portrait only
+  'below-tablet': ( max-width: 767px ), // covering gap from 480 to 997 if needed
+  'tablet': ( max-width: 768px ), // for mobile landscape and tablet portrait
+  'below-desktop': (max-width: 991px), // covering gap from 768 to 992 if needed
+  'desktop'  : ( min-width: 992px ), // for desktop and tablet landscape
+);
+
+@mixin breakpoint($point) {
+  @if $point == smallmobile {
+    @media (max-width: 369px) { @content ; }
+  }
+  @else if $point == mobile {
+    @media (max-width: 767px) { @content ; }
+  }
+  /*@else if $point == md {
+    @media (max-width: 768px) { @content ; }
+   }*/     
+  @else if $point == lg {
+    @media (max-width: 992px) { @content ; }
+  }
+  @else if $point == xl {
+    @media (max-width: 1200px) { @content ; }
+    }
+  
+ }
+
+
+@mixin border-radius($args...) {
+  -moz-border-radius: $args;
+  -webkit-border-radius: $args;
+  border-radius: $args;
+}
+
+@mixin font-size($font-size,$line-height){
+	font-size: $font-size;
+	line-height: $line-height;
+}
+
+@mixin btn-color($color,$fgcolor){
+    font-family: $MuseoSans700;
+    color:$color;
+    padding: 11px 25px;
+    font-size: 14px;
+    border-radius: 28px;
+    border: 3px solid $color;
+    background: transparent;
+    &:hover{
+        background: $color;
+        color: $fgcolor;
+        &:after{
+            background-position: -286px  0;
+        }
+    }
+    &:after{
+         content: " ";
+         margin-left: 14px;
+         height: 11px;
+         width: 8px;
+         display: inline-block;
+         background-repeat: no-repeat;
+         background-image: $icon-sprite;
+    }
+}
+
+@mixin input-btn($color){
+    border: 3px solid $color;
+    color: $color;
+    @include placeholder-text($color);
+    &:focus{
+        border: 3px solid $color;
+    }
+}
+
+@mixin input-addon-color($color,$top,$left)
+{
+    background-color: $color;
+    border: 3px solid $color;
+    &:after{
+     content: " ";
+     height: 11px;
+     width: 8px;
+     display: inline-block;
+     background-repeat: no-repeat;
+     background-image: $icon-sprite;
+     background-position: $top  $left;
+    }
+}
+
+@mixin placeholder-text($color){
+    &::-webkit-input-placeholder {
+         color:$color;
+    }
+    &:-moz-placeholder { /* Firefox 18- */
+         color:$color;
+    }
+
+    &::-moz-placeholder {  /* Firefox 19+ */
+         color:$color;
+    }
+    &:-ms-input-placeholder {
+         color:$color;
+    }
+}
+
+@mixin centerer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin user-select-none(){
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+@mixin animate-bottom-line($color, $padding, $stroke){
+    @include respond-to(desktop){
+        display:inline-block;
+        height:20px;
+        &:hover{
+            color: $color;
+            background-color: transparent;
+            &:after {
+                transform: scaleX(1);
+                padding-bottom: $padding;
+            }
+        }
+        &:after {
+              display:block;
+              content: '';
+              padding-bottom: $padding;
+              border-bottom: $stroke solid $color;
+              transform: scaleX(0);
+              transition: transform .5s ease-in-out;
+        }
+    }
+}
+
+/* This mixin is for theme generation */
+@mixin theme-generator($bgColor, $btnColor, $fgColor, $btnXpos, $btnYpos)
+{
+    .square-block-cta-text , &.ra-two-colum-text-image, &.mod-compMessageBar ,&.testimonial-caption-theme, &.common-comp,&.flexible-text-image-teaser{
+        background: $bgColor;
+        color: $fgColor;
+    }
+    .btn{
+        @include btn-color($btnColor,$fgColor);
+        &:after{
+            background-position: $btnXpos  $btnYpos;
+        }
+    }
+    .input-btn-group{
+      .input-text{
+        @include input-btn($btnColor);
+      }
+      .input-addon{
+        @include input-addon-color($btnColor,$btnXpos,$btnYpos);
+      }
+    }
+    .input-result{
+      background: $btnColor;
+     }
+    .ra-label,.text-link{
+      color:$btnColor;
+    }
+    a{
+      color: $btnColor;
+      padding-bottom:10px;
+      &.underline , &.login-text{
+        border-bottom: 2px solid $btnColor;
+      }
+      &:hover{
+        color:$btnColor;
+        text-decoration: none;
+        cursor: pointer;
+      }
+    }
+    h3,p {
+      color: $fgColor;
+    }
+    &.ra-two-colum-text-image {
+      a.login-text {
+        color:$fgColor;
+        border-bottom-color: $fgColor;
+      }
+    }
+    .carousel-indicators {
+        li{
+          border: 2px solid $btnColor;
+        }
+        .active{
+          background-color:$btnColor;
+        }
+    }
+    &.testimonial-carousel .carousel-inner .item .border-quote {
+         border-bottom: 3px solid $btnColor;
+        .border-span span{
+          border-top: 6px solid $bgColor;
+          &:before{
+            border-color: $btnColor $btnColor transparent transparent;
+          }
+          &:after{
+            border-color: $btnColor;
+          }
+        }
+    }
+    &.testimonial-carousel .carousel-control {
+      .icn-ra-panel-left,.icn-ra-panel-right{
+        color:$btnColor;
+      }
+    }
+}
+
+
+
+/*********************
+BREAKPOINTS
+*********************/
+@mixin respond-to($name) {
+  // If the key exists in the map
+  @if map-has-key($breakpoints, $name) {
+    // Prints a media query based on the value
+    @media #{inspect(map-get($breakpoints, $name))} {
+      @content;
+    }
+  }
+
+  // If the key doesn't exist in the map
+  @else {
+    @warn "Unfortunately, no value could be retrieved from `#{$breakpoints}`. "
+        + "Please make sure it is defined in `$breakpoints` map.";
+  }
+}
+
+@mixin color-spacing($name, $prop)
+{
+  // If the key exists in the map
+  @if map-has-key($color-spacing, $name) {
+       // Prints a prop based on the value
+       #{$prop} : #{inspect(map-get($color-spacing, $name))};
+  }
+   // If the key doesn't exist in the map
+  @else {
+    @warn "Unfortunately, no value could be retrieved from `#{$color-spacing}`. "
+        + "Please make sure it is defined in `$color-spacing` map.";
+  }
+}

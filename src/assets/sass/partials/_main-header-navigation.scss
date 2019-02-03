@@ -1,0 +1,73 @@
+header { 
+  float: left; 
+  width:100%; 
+  }
+.topheader {
+  float: left;
+  width: 100%;
+  padding: 10px 0;
+  background: $color-header-color;
+  &__search-term {
+    span {
+      font-weight: bold;
+    }
+  }
+}
+
+.topheadernav {
+  background: $color-white;
+  float: left;
+  width: 100%;
+  padding: 0px; 
+  position: relative; 
+  &__navigation {
+  }
+}
+.rightmenubox {
+  float: left;
+  padding: 0;
+  width: 100%;
+  border-bottom: 1px solid $color-border;
+  @include breakpoint(lg){
+    padding: 15px 0;
+  }
+  &__menubox {
+  display: inline-block;
+  vertical-align: middle;
+  @include breakpoint(lg){
+    display: none;
+  }
+  ul {
+    padding: 0px;
+    margin: 0;
+    font-size: 0px;
+    li {
+      font-size: convert-in-rem(16);
+      line-height: convert-in-rem(22);
+      display: inline-block;
+      padding: 0 15px;
+      vertical-align: middle;
+      @include breakpoint(xl){
+        font-size: convert-in-rem(13);
+      }      
+      a {
+        color: $color-light-grey;
+        text-decoration: none;
+        padding: 20px 0;
+        display: block;
+        @include breakpoint(xl){
+          padding: 0 10px;
+        }
+        
+        &.active { 
+          border-bottom: 2px solid green;
+        }       
+      }
+      &:first-child {
+          padding-left: 0;
+      }
+    }
+  }
+}
+}
+
